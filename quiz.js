@@ -97,11 +97,16 @@ userAnswers[questionIndex] = answer.group; // this saves the answer and updates 
   });
 
     // Add a submit button at the bottom also linked with css aand html
+    const wrapper = document.createElement('div');
+    wrapper.className = 'submit-wrapper';
+
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Submit Quiz';
     submitButton.className = 'submit-button';
     submitButton.onclick = showResults;
-    questionEl.appendChild(submitButton);
+
+    wrapper.appendChild(submitButton);
+    questionEl.appendChild(wrapper);
 }
 function selectAnswer(group) {
     userAnswers.push(group);
