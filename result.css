@@ -1,0 +1,64 @@
+body{
+  height: 100vh;
+  background: linear-gradient(
+    to top,
+    #DFA9FF 0%,
+    #DFA9FF 50%,
+    #B454FF 50%,
+    #B454FF 100%
+  );
+  min-height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+  h1 {
+    font-size: 3em;
+    font-family: 'Karia';
+    color: #000000;
+    text-align: center;  
+  }
+
+  .container {
+    background-color: white;
+    width: auto;
+    height: auto;
+    margin: 100px auto; /* Center it */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  
+  .small-container {
+    border: 2px solid #B454FF;
+    padding: 5px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+  }
+  button {
+    font-family: 'Kadwa';
+    background-color: #B454FF;
+    border-radius: 25px; /* More rounded corners */
+    border: none;
+    color: white;
+    padding: 20px 40px; /* Larger padding */
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px; /* Larger font */
+    transition-duration: .4s;
+    margin: 30px auto;
+    cursor: pointer;
+    width: 250px; 
+  }
+  button:hover {
+    background-color: #EDD8FA;
+    color: #B454FF;
+    box-shadow:  0 4px 4px rgba(0, 0, 0, 0.5);;
+  }
