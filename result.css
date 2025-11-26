@@ -77,7 +77,13 @@ ul li a:hover {
    padding: 2rem;
    text-align: center;
   }
-  
+  .bar {
+     width:100%; 
+     background:#eee;
+      height:14px; 
+     border-radius:8px; 
+     overflow:hidden;
+  }
   button {
       font-family: 'Kadwa';
       background-color: #FFF4F0;

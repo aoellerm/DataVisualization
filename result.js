@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h2 class="group-title">${title} <span class="small">(${total} words)</span></h2>
         <p class="pct-line">Positive: <strong>${posPct}%</strong> &nbsp; | &nbsp; Negative: <strong>${negPct}%</strong></p>
 
-        <div class="bar" aria-hidden="true" style="width:100%; background:#eee; height:14px; border-radius:8px; overflow:hidden;">
+        <div class="bar">
           <div class="pos-bar" style="width:${posPct}%; height:100%;"></div>
         </div>
       </div>
