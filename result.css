@@ -37,6 +37,7 @@ ul li a:hover {
     font-size: 3em;
     font-family: 'Karia';
     text-align: center;  
+    font-size: clamp(2.5rem, 3.5vw, 4.5rem);
   }
   .box1 {
    box-shadow: 0 4px 8px #00000070;

@@ -7,50 +7,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const quiz = [ //questions in question, in this case each question choice is linked to a group
     {
-      question: "Pick a vacation spot:",
+      question: "To what gender do you associate the word logical:", polarity: "positive", //positive
       answers: [
-        { text: "Tokyo", group: "Got7" },
-        { text: "Chicago", group: "IDLE" },
-        { text: "Bangkok", group: "SEVENTEEN" },
-        { text: "Seoul", group: "TWICE" }
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
       ]
     },
     {
-      question: "Pick a color:",
+      question: "To what gender do you associate the word wise:", polarity: "positive", //positive
       answers: [
-        { text: "Green", group: "Got7" },
-        { text: "Red", group: "IDLE" },
-        { text: "Blue", group: "SEVENTEEN" },
-        { text: "Magenta", group: "TWICE" }
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
       ]
     },
     {
-      question: "Pick a snack:",
+      question: "To what gender do you associate the word competent:", polarity: "positive", //positive
       answers: [
-        { text: "Beef Jerkey", group: "Got7" },
-        { text: "Tangerines", group: "IDLE" },
-        { text: "Ice Cream", group: "SEVENTEEN" },
-        { text: "Raspberries", group: "TWICE" }
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
       ]
     },
     {
-        question: "Pick a flower:",
-        answers: [
-          { text: "Daisy", group: "Got7" },
-          { text: "Orchid", group: "IDLE" },
-          { text: "Hibiscus", group: "SEVENTEEN" },
-          { text: "Carnation", group: "TWICE" }
+      question: "To what gender do you associate the word creative:", polarity: "positive", //positive
+      answers: [
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
+      ]
+      },
+      {
+      question: "To what gender do you associate the word irresponsible:", polarity: "negative",//negative
+      answers: [
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
         ]
       },
       {
-        question: "Pick a hobby:",
-        answers: [
-          { text: "Dancing", group: "Got7" },
-          { text: "Art", group: "IDLE" },
-          { text: "Watching Movies", group: "SEVENTEEN" },
-          { text: "Baking", group: "TWICE" }
-        ]
-      }
+      question: "To what gender do you associate the word frivolous:", polarity: "negative",//negative
+      answers: [
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
+      ]
+      },
+      {
+      question: "To what gender do you associate the word sensitive:", polarity: "negative",//negative
+      answers: [
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
+      ]
+      },
+       {
+      question: "To what gender do you associate the word emotional:", polarity: "negative", //negative
+      answers: [
+        { text: "Men", group: "men" },
+        { text: "Women", group: "women" },
+        { text: "Other", group: "other" },
+      ]
+    }
   ];
   
  
@@ -120,23 +139,60 @@ function selectAnswer(group) {
   }
   
   function showResults() {
-    if (userAnswers.length < quiz.length || userAnswers.includes(undefined)) {
-      alert("Please answer all questions!");
-      return;
+  // validation
+  if (userAnswers.length < quiz.length || userAnswers.includes(undefined)) {
+    alert("Please answer all questions!");
+    return;
+  }
+
+  // initialize groups
+  const groups = {
+    men:   { pos: 0, neg: 0, total: 0 },
+    women: { pos: 0, neg: 0, total: 0 },
+    other: { pos: 0, neg: 0, total: 0 }
+  };
+
+  // tally answers using question polarity
+  quiz.forEach((q, i) => {
+    const chosenGroup = userAnswers[i]; // "men" / "women" / "other"
+    if (!chosenGroup || !groups[chosenGroup]) return; // defensive
+    if (q.polarity === 'positive') {
+      groups[chosenGroup].pos += 1;
+    } else if (q.polarity === 'negative') {
+      groups[chosenGroup].neg += 1;
     }
-    const tally = {}; //keeps track of each groups tally/selection amount
-    userAnswers.forEach(group => {
-      tally[group] = (tally[group] || 0) + 1;
-    });
+    groups[chosenGroup].total += 1;
+  });
 
-    // Find highest scoring group
-  const max = Math.max(...Object.values(tally));
-  const winners = Object.keys(tally).filter(group => tally[group] === max);
+  // compute percentages
+  const results = {};
+  Object.keys(groups).forEach(g => {
+    const { pos, neg, total } = groups[g];
+    if (total === 0) {
+      results[g] = { posPct: 0, negPct: 0, total: 0 };
+    } else {
+      let posPct = Math.round((pos / total) * 100);
+      let negPct = Math.round((neg / total) * 100);
+      const adjust = 100 - (posPct + negPct);
+      // apply rounding adjustment to the larger side to keep it intuitive
+      if (adjust !== 0) {
+        if (pos >= neg) posPct += adjust;
+        else negPct += adjust;
+      }
+      results[g] = { posPct, negPct, total };
+    }
+  });
 
-  // Choose a random winner if there's a tie
-  const winner = winners[Math.floor(Math.random() * winners.length)];
+  // pick top group: highest posPct, tie-breaker by total counts
+  let top = null;
+  Object.keys(results).forEach(g => {
+    if (!top) { top = g; return; }
+    const a = results[g], b = results[top];
+    if (a.posPct > b.posPct || (a.posPct === b.posPct && a.total > b.total)) top = g;
+  });
 
-  localStorage.setItem('winner', winner);
+  // save results (new format) and winner fallback (old format), then redirect
+  localStorage.setItem('results', JSON.stringify({ groups: results, top }));
+  if (top) localStorage.setItem('winner', top);
   window.location.href = 'result.html';
-
 }
