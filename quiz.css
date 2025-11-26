@@ -33,9 +33,11 @@ body{
   border-radius: 7px;
 }
 h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: #FFF4F0;
 }
 h2 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 2em;
   font-family: 'Karia';
   text-align: center;  
@@ -84,11 +86,11 @@ h2 {
   height: 50px;
   
   border-radius: 7px;
+  color: #785D4D;
   background-color: #f9f9f9;
   border: 2px solid #785D4D;
   font-size: 1em;
-  font-family: 'Karia';
-  color: #000000;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: center; 
   }
 
@@ -110,7 +112,7 @@ h2 {
 }
 
 .submit-button {
-  font-family: 'Kadwa';
+  font-family:  Georgia, 'Times New Roman', serif;
   background-color: #785D4D;
   border-radius: 15px;
   border: none;
