@@ -82,7 +82,7 @@ ul li a:hover {
   }
   
   .start-page button {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       background-color: #FFF4F0;
       border-radius: 7px; /* More rounded corners */
       border: none;
