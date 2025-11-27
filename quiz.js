@@ -138,6 +138,7 @@ function selectAnswer(group) {
     }
   }
   
+  // edited this from og quiz
   function showResults() {
   // validation
   if (userAnswers.length < quiz.length || userAnswers.includes(undefined)) {
