@@ -137,7 +137,43 @@ function selectAnswer(group) {
       showResults();
     }
   }
-  
+  function postResultsToSheetBackground(resultsObj) {
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwfiQyP0vtCqZrz4MHcPi7swqAXjzLzBIxbRWQMhjGgqlEECeG2kTcBLLMxSZLa3wdN/exec'; // your webapp URL
+  const payload = JSON.stringify(resultsObj);
+
+  // Try navigator.sendBeacon first (best for background sends)
+  if (navigator && typeof navigator.sendBeacon === 'function') {
+    try {
+      const blob = new Blob([payload], { type: 'application/json' });
+      const ok = navigator.sendBeacon(scriptUrl, blob);
+      console.log('sendBeacon used, queued:', ok);
+      return Promise.resolve({ sent: ok, method: 'beacon' });
+    } catch (err) {
+      console.warn('sendBeacon failed, falling back to fetch:', err);
+      // fallthrough to fetch fallback
+    }
+  }
+
+  // Fallback: fetch with keepalive (works on most modern browsers)
+  try {
+    return fetch(scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload,
+      // keepalive allows the browser to continue the request during navigation/unload
+      keepalive: true
+    })
+    .then(r => r.text().then(t => {
+      try { return JSON.parse(t); } catch(e){ return { raw: t }; }
+    }))
+    .then(resp => ({ sent: true, method: 'fetch', resp }))
+    .catch(err => ({ sent: false, method: 'fetch', error: err }));
+  } catch (err) {
+    console.error('Background post failed (no beacon/fetch):', err);
+    return Promise.resolve({ sent: false, error: err });
+  }
+}
+
   // edited this from og quiz
   function showResults() {
   // validation
@@ -191,9 +227,24 @@ function selectAnswer(group) {
     const a = results[g], b = results[top];
     if (a.posPct > b.posPct || (a.posPct === b.posPct && a.total > b.total)) top = g;
   });
+ // payload to save & send
+  const payload = { groups: results, top };
+  payload.secret = "wompwomp";
 
-  // save results (new format) and winner fallback (old format), then redirect
-  localStorage.setItem('results', JSON.stringify({ groups: results, top }));
-  if (top) localStorage.setItem('winner', top);
+  // Save to localStorage so result.html can immediately show the same results
+  try {
+    localStorage.setItem('results', JSON.stringify(payload));
+    if (top) localStorage.setItem('winner', top); // keep your fallback compatible
+  } catch (e) {
+    console.warn('Could not save to localStorage:', e);
+  }
+
+  // Fire-and-forget send to your Apps Script (background friendly)
+  // We don't await the full result here because we want the user to see their result immediately.
+  postResultsToSheetBackground(payload)
+    .then(info => console.log('background post info:', info))
+    .catch(err => console.error('background post error:', err));
+
+  // Immediately redirect to results page (user sees the result); the browser will attempt to deliver the background post.
   window.location.href = 'result.html';
 }
