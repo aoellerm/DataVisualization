@@ -97,5 +97,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //restart function
 function restartQuiz() {
-  window.location.href = 'start.html';
+  window.location.href = 'index.html';
 }
