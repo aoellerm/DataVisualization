@@ -102,12 +102,16 @@ ul li a:hover {
       text-decoration: none;
       display: block;
       font-size: 20px; /* Larger font */
-      transition-duration: .4s;
       margin: 30px auto;
       cursor: pointer;
       width: 250px; 
       transition-duration: .4s;
   }
+  button:focus {
+  outline: 3px solid #EAC4B0;   /* High-contrast outline */
+  outline-offset: 4px;          /* Space between outline and button */
+  box-shadow: 0 0 0 4px #FFF4F0; /* Soft glow effect */
+}
   button:hover {
     background-color: #785D4D;
     color: #FFF4F0;
@@ -131,7 +135,7 @@ ul li a:hover {
     padding: 0.5em;
   }
    ul {
-    flex-direction: column;
+   flex-direction: column;
     align-items: center;
   }
   .box1 {
@@ -143,6 +147,14 @@ ul li a:hover {
     padding: .5rem;
     margin-top: 1rem;
   }
+  .box2, .small-box {
+  max-width: 95%;
+  margin: 0 auto;
+}
+button:focus, ul li a:focus {
+  outline: 3px solid #EAC4B0;
+  outline-offset: 4px;
+}
   /* Big box holds the button below */
   .big-box {
     padding: 2rem;
@@ -155,4 +167,3 @@ ul li a:hover {
     display: none;
   }
 }
-  
