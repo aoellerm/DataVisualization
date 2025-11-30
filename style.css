@@ -36,11 +36,11 @@ ul li a:hover {
     font-size: 3em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;  
-     font-size: clamp(1rem, 3vw, 5rem);
+    font-size: clamp(1rem, 3vw, 5rem);
   }
   h3 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: clamp(.7rem, 1vw, 2rem);
+    font-size: clamp(.7rem, 2vw, 3rem);
   }
   .box1 {
    box-shadow: 0 4px 8px #00000070;
@@ -57,7 +57,7 @@ ul li a:hover {
    padding: 2rem;
   }
   .gap {
-    padding: 2em;
+    padding: 1em;
   }
   .buttonGap {
    background-color: #EAC4B0;
@@ -119,7 +119,7 @@ ul li a:hover {
   margin: 0;
 }
   .gap {
-    display: none;
+    padding: 0.5em;
   }
    ul {
     flex-direction: column;
@@ -139,7 +139,6 @@ ul li a:hover {
   /* Big box holds the button below */
   .big-box {
     padding: 2rem;
-    margin-top: 1rem;
     text-align: center;
   }
   .buttonGap {

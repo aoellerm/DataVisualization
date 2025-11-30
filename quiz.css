@@ -8,7 +8,7 @@ body{
   margin: 0;
 }
 .gap {
-    padding: 2em;
+  padding: 2em;
   }
 .titlebox {
   display: flex;
@@ -35,10 +35,11 @@ body{
 h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: #FFF4F0;
+  font-size: clamp(1rem, 3vw, 5rem);
 }
 h2 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 2em;
+  font-size: clamp(.7rem, 2vw, 3rem);
   font-family: 'Karia';
   text-align: center;  
 }
@@ -89,7 +90,7 @@ h2 {
   color: #785D4D;
   background-color: #f9f9f9;
   border: 2px solid #785D4D;
-  font-size: 1em;
+  font-size: clamp(.7rem, 2vw, 3rem);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: center; 
   }
@@ -121,7 +122,7 @@ h2 {
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 16px;
+  font-size: clamp(1rem, 1.5vw, 2rem);
   transition-duration: .4s;
   margin: 20px auto;
 }
@@ -129,4 +130,31 @@ h2 {
   background-color: #FFF4F0;
   color: #785D4D;
   box-shadow:  0 4px 4px rgba(0, 0, 0, 0.5);;
+}
+@media screen and (max-width: 640px) { 
+  .titlebox {
+    display: block;
+    padding: 0;
+  }
+  .title {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .question {
+    width: 70%;
+    padding: 20px;
+    border-width: 10px;
+    margin: 20px auto;
+  }
+
+  .answer-button {
+    font-size: 0.9em;
+    height: 25%;
+    width: 80%; /* full width for easy tap */
+  }
+
+  .submit-button {
+    padding: 10px 20px;
+    margin: 10px auto;
+  }
 }
