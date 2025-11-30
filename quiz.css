@@ -131,7 +131,7 @@ h2 {
   color: #785D4D;
   box-shadow:  0 4px 4px rgba(0, 0, 0, 0.5);;
 }
-@media screen and (max-width: 640px) { 
+@media screen and (max-width: 810px) { 
   .titlebox {
     display: block;
     padding: 0;
