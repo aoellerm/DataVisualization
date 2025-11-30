@@ -33,7 +33,6 @@ ul li a:hover {
   color: #785D4D;
 }
   h1 {
-    font-size: 3em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;  
     font-size: clamp(1rem, 3vw, 5rem);

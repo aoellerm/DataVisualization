@@ -39,7 +39,7 @@ h1 {
 }
 h2 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: clamp(.7rem, 2vw, 3rem);
+  font-size: clamp(1rem, 2vw, 3rem);
   font-family: 'Karia';
   text-align: center;  
 }
